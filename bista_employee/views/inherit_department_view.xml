@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_department_view" model="ir.ui.view">
+        <field name="name">hr.department.form</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+
+        <xpath expr="//form//sheet//group" position="replace">
+        <group >
+            <group name="Department Info" string="Department Info">
+            <field name="name"/>
+            <field name="manager_id"/>
+            <field name="parent_id"/>
+            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+            <field name="service" widget="many2many_tags"/>
+        </group>
+        <!-- <group> -->
+            <group  name="manager_details" string="Manager Details">
+                <field name="manager_email" />
+                <field name="manager_phone" />
+                <field name="manager_unit" />
+            </group>
+        </group>
+
+        <notebook>
+            <page name="employee" string="Employee">
+                <field name="member_ids" widget="one2many_list">
+                                        <tree editable="bottom">
+                                            <field name="name" />
+                                            <field name="work_email" />
+                                            <field name="work_phone" />
+                                        </tree>
+                                    </field>
+                
+                
+            </page>
+        </notebook>
+        
+        <!-- </group> -->
+            
+        </xpath>
+        
+        
+        </field>
+    </record>
+
+</odoo>

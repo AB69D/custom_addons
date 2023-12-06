@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="object_record_line_form_view" model="ir.ui.view">
+            <field name="name">object.record.line.form</field>
+            <field name="model">object.record.line</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <button class="oe_highlight" type="object" name="show_male" string="Show Male Persons"/>
+                <button class="oe_highlight" type="object" name="show_female" string="Show Female Persons"/>
+                <sheet>
+                    <group>
+                    <field name="name" style="font-size:50px;"/>
+                        <group>              
+                            <group name="phone_district" string="Optional">
+                               <field name="email"/>
+                               <field name="phone"/>
+                                <field name="district"/> 
+                                <field name="tags" widget="many2many_tags"/> 
+                                <field name="tags_line"/> 
+                                <field name="default_value"/>
+                                <field name="context_value"/>
+                            </group> 
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="object_record_line_tree_view" model="ir.ui.view">
+                <field name="name">object.record.line.tree</field>
+                <field name="model">object.record.line</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="district"/>
+                        <!-- <field name="default_value"/> -->
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_object_record_line" model="ir.actions.act_window">
+            <field name="name">Record </field>
+            <field name="res_model">object.record.line</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+
+    </data>
+</odoo>

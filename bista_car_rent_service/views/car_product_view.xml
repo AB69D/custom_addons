@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="car_product_form_view" model="ir.ui.view">
+            <field name="name">car.product.form</field>
+            <field name="model">car.product</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                <div class="oe_button_box" name="button_box">
+                            <button class="btn btn-primary oe_stat_button" type="object" name="action_total_rent_history"
+                                    icon='fa-solid fa-users'>
+                                    <field name="transfer_history_count"/>
+                                History
+                            </button>
+                    </div>
+                <field name="image" widget='image' class="oe_avatar"/>
+                    <group>
+                        <field name="name" string="Model" style="font-size:50px;"/>
+                        <group name="name" string="Price">   
+                            <field name="cost_price"/>
+                            <field name="sale_price"/>
+                            <field name="avilable_quantity"/>
+                            
+                        </group>
+                        <group name="details" string="Brand">
+                          <field name="brand"/>
+                          <field name="color_tag" widget="many2many_tags"/>  
+                        </group>       
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="car_product_tree_view" model="ir.ui.view">
+                <field name="name">car.product.tree</field>
+                <field name="model">car.product</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name" string="Model"/>
+                        <field name="cost_price"/>
+                        <field name="sale_price"/>
+                        <field name="brand"/>         
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="car_product_action" model="ir.actions.act_window">
+            <field name="name">Car List</field>
+            <field name="res_model">car.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

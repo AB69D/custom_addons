@@ -1,0 +1,27 @@
+{
+    'name': 'Bista Employee',
+    'version': '16.0.1.0.0',
+    'description': 'This module is just for testing my employee module',
+    'author': 'AB9D',
+    'category':'Test Module',
+    'website': 'oabdoo.com',
+    'depends': ['base','mail','hr','sale','stock','product'],
+    'sequence': -10000000,
+    'summary':'this module build for test',
+    'data': [
+        'views/employee_employee_view.xml',
+        'views/object_record_line.xml',
+        'views/record_tag_views.xml',
+        'views/class_class.xml',
+        'views/inherit_department_view.xml',
+        'views/inherit_product_product_view.xml',
+        'views/inherit_sale_order_view.xml',
+        
+        'views/menu.xml',
+        'security/access_group.xml',
+        'security/ir.model.access.csv',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

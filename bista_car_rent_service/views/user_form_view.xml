@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="user_form_form_view" model="ir.ui.view">
+            <field name="name">user.form.register.form</field>
+            <field name="model">user.form.register</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <header>
+                    <button string="Validate" name="submit_for_validation" type="object" class="oe_highlight" states='draft'/>
+                    <button string="Cancel" name="submit_for_cancel" type="object" class="oe_highlight" states='validation'/>
+                    <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation' attrs="{'invisible': [('can_return', '=', 'True')]}" />
+                    <button string="Create Delivery" name="submit_for_create_delivery" type="object"  states='validation'/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                <div class="oe_button_box" name="button_box">
+                            <button class="btn btn-primary oe_stat_button" type="object" name="action_view_history"
+                                    icon='fa-truck'>
+                                    <field name="transfer_delivery_count"/>
+                                Delivery
+                            </button>
+                    </div>
+                    <group>
+                        <field name="ref" style="font-size:50px;"/>
+
+                        <group name="name" string="Details">
+                            <field name="rent_for"/>
+                            <field name="rent_purpose"/> 
+                        </group>
+                        <group name="date" string="Date">
+                            <field name="rent_date"/>
+                            
+                        </group>
+                        <group name="Responsible Person" string="Responsible Person">
+                            <field name="responsible_person_internal" />
+                            <field name="nid_number"/>
+                            <field name="nid"/>
+                            <field name="driving_licence"/>
+                        </group>
+                        <group name="package" string="Rent Package">
+                            <field name="rent_package"/>
+                            <field name="rent_day"/>
+                            <field name="return_date"/>
+                            <field name="can_return" invisible='1'/>
+                        </group>
+                                         
+                    </group>
+                    <notebook>
+                        <page name="car" string="Car List">
+                            <field name="product_details_lines">
+                                <tree editable="bottom" create="1">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="done_qty"/>
+                                    <field name="expected_delivery_qty" />
+                                    <!-- <field name="tax_ids" widget="many2many_tags" /> -->
+                                    
+                                    <field name="currency_id" invisible='1'/>
+                                    <field name="rent_amount" sum="Total Rent"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="package_details" string="Package Details">
+                            
+                        </page>
+                        <page name="other_info" string="Other Info">
+                            
+                        </page>
+                    </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="user_form_tree_view" model="ir.ui.view">
+                <field name="name">user.form.register.tree</field>
+                <field name="model">user.form.register</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="ref"/>              
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_user_form" model="ir.actions.act_window">
+            <field name="name">Rent Car</field>
+            <field name="res_model">user.form.register</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

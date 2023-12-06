@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_form_all,user.form.register,model_user_form_register,,1,1,1,1
+access_product_for_rent_all,product.for.rent,model_product_for_rent,,1,1,1,1
+access_car_product_all,car.product,model_car_product,,1,1,1,1
+access_color_tag_all,color.tag,model_color_tag,,1,1,1,1
+access_car_brand_all,car.brand,model_car_brand,,1,1,1,1
+access_rent_package_all,rent.package,model_rent_package,,1,1,1,1
+access_rent_history_all,rent.history,model_rent_history,,1,1,1,1
+access_line_history_rent_all,line.history.rent,model_line_history_rent,,1,1,1,1
+
+

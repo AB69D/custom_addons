@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="rent_history_form_view" model="ir.ui.view">
+            <field name="name">rent.history.form</field>
+            <field name="model">rent.history</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <header>
+                    <button string="Check Reserve" name="check_for_reserve" type="object" class="oe_highlight" states='draft'/>
+                    <button string="Process for Payment" name="get_paid" type="object"  states='draft'/>
+                    <button string="Payment" name="get_payment" type="object" class="oe_highlight" states='payment'/>
+                    <!-- <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation'/> -->
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="ref" style="font-size:50px;"/>
+                        <group name="user" string="user">
+                            <field name="res_user" />
+                        </group>
+                        <group name="name" string="Date">
+                            <field name="rent_date"/>
+                            <field name="return_date"/> 
+                        </group>
+                        <group name="source" string="Source">
+                            <field name="source_doc"/>
+                            
+                        </group>
+                                         
+                    </group>
+                    <notebook>
+                        <page name="car" string="Car List">
+                            <field name="product_details_lines">
+                                <tree editable="bottom" create="1">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="reserve_qty"/>
+                                    <!-- <field name="demand_qty" /> -->
+                                    <field name="done_qty" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="package_details" string="Package Details">
+                            
+                        </page>
+                        <page name="other_info" string="Other Info">
+                            
+                        </page>
+                    </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="rent_history_tree_view" model="ir.ui.view">
+                <field name="name">rent.history.tree</field>
+                <field name="model">rent.history</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="ref"/>
+                        <field name="res_user"/>
+                        <field name="rent_date"/>
+                        <field name="return_date"/> 
+                        <field name="source_doc"/>              
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_rent_history" model="ir.actions.act_window">
+            <field name="name">Rent history</field>
+            <field name="res_model">rent.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

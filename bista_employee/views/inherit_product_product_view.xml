@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="inherit_product_product_from_view" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//form//sheet//notebook//page" position="inside">
+                <field name="package_count" />
+            </xpath> -->
+
+            <field name="detailed_type" position="after">
+                <field name="package_count" />
+            </field>
+                    
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_sale_order_view" model="ir.ui.view">
+        <field name="name">sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="phone" optional="hide"/>
+            </field>
+            <field name="invoice_status" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <!-- <xpath expr="//field[@name='invoice_status']" position="attributes">
+                <attribute name="optional">show</attribute>
+            </xpath> -->
+        </field>
+    </record>
+
+
+    <record id="inherit_sale_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+                <field name="phone"/>
+            </field>
+            <field name="partner_id" position="after">
+                <!-- <field name="phone"/> -->
+                <field name="email" readonly="True"/>
+            </field>
+
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_uom_qty']" position="before">
+                <field name="product_package" readonly='1'/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_sale_order_search_view" model="ir.ui.view">
+        <field name="name">sale.order.list.select</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//search" position="inside">
+                <field name="campaign_id" position="replace">
+                    <field name="phone"/>
+                    <field name="email"/>
+                </field>
+            </xpath>
+
+            <xpath expr="//search//group" position="inside">
+                <filter name="Online Confirmation" string="Online Confirmation"  context="{'group_by': 'require_signature'}" />
+                <filter string="Pending Invoices" name="pending_invoices" domain="[('invoice_status', '=', 'to invoice')]"/>
+            </xpath>
+        </field>
+    </record>
+    
+
+</odoo>

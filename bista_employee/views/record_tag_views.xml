@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="record_tag_form_view" model="ir.ui.view">
+            <field name="name">record.tag.form</field>
+            <field name="model">record.tag</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Tag Deatails">
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group name="name" string="Test model">
+                            <field name="select_model"/> 
+                            <button class="oe_highlight" type="object" name="show_data" string="Show"/>   
+                        </group>
+                                         
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="record_tag_tree_view" model="ir.ui.view">
+                <field name="name">record.tag.tree</field>
+                <field name="model">record.tag</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name"/>
+                        <field name="description"/>
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_record_tag" model="ir.actions.act_window">
+            <field name="name">Record </field>
+            <field name="res_model">record.tag</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

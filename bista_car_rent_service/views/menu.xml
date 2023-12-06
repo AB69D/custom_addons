@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<menuitem id="base_menu" name="Bista Car Rent" sequence="2" >
+        <menuitem id="users_menu" name="Rent Request" sequence="1">
+            <menuitem id="user_list_menu" name="Rent Request" action="action_user_form" sequence="1"/>
+        </menuitem>
+        
+        <menuitem id="car_list" name="Car List" sequence="2">
+            <menuitem id="car_list_menu" name="Car List" action="car_product_action" sequence="1"/>
+            <!-- <menuitem id="purchase_car_menu" name="Purchase Car" action="action_purchase_car" sequence="2"/> -->
+            
+        </menuitem>
+        
+        <menuitem id="configure_menu" name="Configure" sequence="3">
+            <menuitem id="color_tag_menu" name="Color Tags" action="action_color_tag" sequence="1"/>
+            <menuitem id="rent_package_menu" name="Rent Package" action="action_rent_package" sequence="2"/>
+            <menuitem id="car_brand_menu" name="Car Brand" action="action_car_brand" sequence="3"/>
+            <menuitem id="car_rent_history_menu" name="Rent History" action="action_rent_history" sequence="4"/>
+            
+        </menuitem>
+
+        <!-- <menuitem id="class_menu" name="Class" sequence="1">
+            <menuitem id="class_menu_id" name="Class" action="action_class" sequence="1"/>
+        </menuitem> -->
+</menuitem>
+
+</odoo>

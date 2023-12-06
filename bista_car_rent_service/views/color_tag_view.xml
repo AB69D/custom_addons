@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="color_tag_form_view" model="ir.ui.view">
+            <field name="name">color.tag.form</field>
+            <field name="model">color.tag</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Tag Deatails">
+                            <field name="name" />
+                        </group>       
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="color_tag_tree_view" model="ir.ui.view">
+                <field name="name">color.tag.tree</field>
+                <field name="model">color.tag</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name"/>
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_color_tag" model="ir.actions.act_window">
+            <field name="name">color </field>
+            <field name="res_model">color.tag</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

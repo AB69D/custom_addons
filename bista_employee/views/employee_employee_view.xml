@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_employee_form_view" model="ir.ui.view">
+            <field name="name">employee.employee.form</field>
+            <field name="model">employee.employee</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <style>
+                    .btn {
+                        margin-down: 20px;
+                        margin-right: 10px;
+                        text-align: center;
+                    }
+
+                    .both {
+                        width: 150px;
+                        text-transform: uppercase;
+                        padding: 10px 15px;
+                        font-size: 20px;
+                        color: black;
+                        letter-spacing: 2px;
+                        font-weight: bold;
+                        border-radius: 10px;
+                        margin: 30px;
+                        outline: none;
+                        border: 3px solid black;
+                        transition: all ease 0.5s;
+                    }
+
+                    #first {
+                        background-color: green;
+                        cursor: pointer;
+                    }
+
+                    #first:hover {
+                        background-color: lightgreen;
+                        color: white;
+                        border: 3px solid white;
+                    }
+
+                    #second {
+                        background-color: blue;
+                        cursor: pointer;
+                    }
+
+                    #second:hover {
+                        background-color: lightblue;
+                        color: white;
+                        border: 3px solid white;
+                    }
+                    #third {
+                        background-color: red;
+                        cursor: pointer;
+                    }
+
+                    #third:hover {
+                        background-color: lightblue;
+                        color: white;
+                        border: 3px solid white;
+                    }
+                </style>
+                <div class="btn">
+                    <button id='first' string="All Tags" name="show_all_tags" type="object" class="oe_highlight"/>
+                    <button id='first' string="All Student Record" name="show_all_record" type="object" class="oe_highlight"/>
+                    <!-- <button class="oe_highlight" string= "show all user" name = "bista_employee.action_employee_employee" id = "first" type="action"/>                  -->
+                    <button class="oe_highlight" string= "Service Products" name = "show_service_product" id = "third" type="object"/>                 
+                    <button class="oe_highlight" string= "Hr Jobs" name = "all_jobs" id = "third" type="object"/>                 
+                    <button id='second' string="Create Tag" name="create_tag" type="object" class="oe_highlight"/>
+                    <button id='second' string="Create Record" name="create_record" type="object" class="oe_highlight"/>
+                    <button id='third' string="recuirment for service" name="create_recuirment_professional_service_traine" type="object" class="oe_highlight"/>
+                </div>
+                <!-- <sheet> -->
+                    <field name="image" widget='image' class="oe_avatar"/>
+                    <group>
+                    <field name="name" style="font-size:50px;"/>
+                        <group>              
+                            <field name="email"/>
+                            <field name="gender"  />
+                            <field name="birthday"/>
+                        </group>
+                        <group name="Advance Details" string="Optional">
+                            <field name="refer"/>
+                            <field name="height"/>
+                            <field name="age"/>
+                        </group>
+                        <group name="note" string="Note">
+                            <field name="note"/>
+                            <group >   
+                            </group>
+                        </group>
+                        <group name="Refer Employee" string="Refer Employee">
+                            <field name="refer_employe" widget="many2many_tags"/>
+                            <field name="id_for_tag" />
+                            
+                            <button name="test_for_add_item" type="object" string="Add[1]" class="oe_highlight"/>                      
+                            <button name="test_for_remove_all_item" type="object" string="Remove all[5]" class="oe_highlight"/>                       
+                            <button name="remove_all_and_replace" type="object" string="Remove all replace [6]" class="oe_highlight"/>                       
+                            <button name="add_one_element" type="object" string="Add 1 element[4]" class="oe_highlight"/>                       
+                            <button name="single_remove" type="object" string="Remove 1 element[3]" class="oe_highlight"/>                       
+                            <button name="single_remove_and_delete" type="object" string="Remove 1 and Delete[2]" class="oe_highlight"/>                       
+                            
+                            </group>      
+                        </group>
+
+                        
+                        <notebook>
+                            <page name="work_importmation" string="Work Information">
+                                <group >
+                                   <field name="work_address"/> 
+                                   <field name="work_location"/> 
+                                   <field name="work_hours"/> 
+                                </group>
+                            </page>
+                            <page name="private_information" string="Private Information">
+                                <group>
+                                    <field name="private_address" />
+                                    <field name="private_email" />
+                                    <field name="personal_phone" />
+                                    <field name="marital_status" />
+                                    <field name="currency_id"/>
+                                    <field name="monetary_field"/>
+                                </group>
+                            </page>
+                            <page name="hr" string="HR Info">
+                                <group name="cv" string="Attuctment">
+                                    <field name="cv" />
+                                    <group name="superviece" string="Supervice">
+                                        <field name="supervice" widget="one2many_list">
+                                        <tree editable="bottom">
+                                            <field name="name" />
+                                            <field name="email" />
+                                            <field name="phone" />
+                                            <field name="district" />
+                                            <field name="tags" />
+                                        </tree>
+                                    </field>
+                                    <group ></group>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    <!-- </sheet> -->
+                    
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_employee_tree_view" model="ir.ui.view">
+                <field name="name">employee.employee.tree</field>
+                <field name="model">employee.employee</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                          <field name="name"/>
+                            <field name="email"/>
+                            <field name="gender"/>
+                            <field name="monetary_field"/>
+                            <button name="show_records" type="object" class="oe_highlight" string="Show Records"/>
+                </tree>                    
+                </field>
+        </record>
+
+        <record id="employee_employee_kanban" model="ir.ui.view">
+            <field name="name">employee.employee.kanban</field>
+            <field name="model">employee.employee</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                                <div class="oe_kanban_global_click">
+                                <field name="image" widget="image" class="oe_avatar"/>
+                                </div>
+                                <div class="oe_kanban_global_click">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong><br/>
+                                    <field name="email"/><br/>
+                                    <field name="personal_phone"/><br/>
+                                    <field name="birthday" /><br/>
+                                    <field name="refer_employe" widget="many2many_tags"/><br/>
+                                    <!-- <button id='first' string="All Tags" name="show_all_tags" type="object" class="oe_highlight"/> -->
+
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="employee_employee_view_graph" model="ir.ui.view">
+            <field name="name">employee.employee.graph</field>
+            <field name="model">employee.employee</field>
+            <field name="arch" type="xml">
+                <graph string="" type="bar">
+                    <field name="name" color="blue"/>
+                    <field name="age" color="green"/>
+                    <field name="monetary_field" type="measure" color="red"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_employee_employee" model="ir.actions.act_window">
+            <field name="name">Users</field>
+            <field name="res_model">employee.employee</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="domain">[('create_uid','=',uid)]</field>
+        </record>
+
+    </data>
+</odoo>

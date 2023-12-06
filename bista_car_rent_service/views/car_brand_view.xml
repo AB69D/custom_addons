@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="car_brand_form_view" model="ir.ui.view">
+            <field name="name">car.brand.form</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Deatails">
+                            <field name="name"/>
+                            <field name="color_tag" widget="many2many_tags"/>
+                        </group>       
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="car_brand_tree_view" model="ir.ui.view">
+                <field name="name">car.brand.tree</field>
+                <field name="model">car.brand</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name"/>
+                        <field name="color_tag"/>
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_car_brand" model="ir.actions.act_window">
+            <field name="name">Car Brand</field>
+            <field name="res_model">car.brand</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

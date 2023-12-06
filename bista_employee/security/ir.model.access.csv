@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_employee_all,employee.employee,model_employee_employee,bista_employee.acess_category_employee_executive,1,0,0,0
+access_employee_employee_approve_all,employee.employee,model_employee_employee,bista_employee.acess_category_employee_approver,1,1,1,1
+access_object_record_line_all,object.record.line,model_object_record_line,bista_employee.acess_category_employee_approver,1,0,0,0
+access_record_tag_all,record.tag,model_record_tag,bista_employee.acess_category_hospital_admin,1,1,1,1
+access_class_class_all,class.class,model_class_class,bista_employee.acess_category_hospital_admin,1,1,1,1
+access_department_service_all,department.service,model_department_service,bista_employee.acess_category_hospital_admin,1,1,1,1

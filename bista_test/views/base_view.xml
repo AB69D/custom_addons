@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="user_details_form_view" model="ir.ui.view">
+            <field name="name">user.details.form</field>
+            <field name="model">user.details</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                    <!-- <sheet> -->
+                    <field name="image" widget='image' class="oe_avatar"/>
+                    <group>
+                    <field name="name" style="font-size:50px;"/>
+                        <group>              
+                            <field name="email"/>
+                            <field name="gender"  />
+                            <field name="birthday"/>
+                            <field name="currency_id"/>
+                            <field name="monetary_field"/>
+                        </group>
+                        <group name="Advance Details" string="Optional">
+                            <field name="refer"/>
+                            <field name="height"/>
+                            <field name="age"/>
+                        </group>
+                        <group name="note" string="Note">
+                            <field name="note"/>
+                            <group >   
+                            </group>
+                        </group>
+                        <group name="cv" string="Attuctment">
+                            <field name="cv" />
+                        </group>      
+                        </group>
+                        <notebook>
+                            <page name="note" string="string">
+                                
+                            </page>
+                        </notebook>
+                    <!-- </sheet> -->
+                </form>
+            </field>
+        </record>
+
+        <record id="user_details_tree_view" model="ir.ui.view">
+                <field name="name">user.details.tree</field>
+                <field name="model">user.details</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <!-- <field name="refer"/> -->
+                            <!-- <field name="height"/> -->
+                            <!-- <field name="age"/> -->
+                            <!-- <field name="cv"/> -->
+                            <!-- <field name="note"/> -->
+                            <!-- <field name="image"/> -->
+                            <!-- <field name="mcurrency_id"/> -->
+                            <field name="gender"/>
+                            <field name="monetary_field"/>
+                </tree>                    
+                </field>
+        </record>
+
+        <record id="user_details_view_search" model="ir.ui.view">
+            <field name="name">user.details.view.search</field>
+            <field name="model">user.details</field>
+            <field name="arch" type="xml">
+                <search>
+                <field name="name"></field>
+                    
+                </search>
+            </field>
+        </record>
+
+        <!-- <record id="user_details_view_activity" model="ir.ui.view">
+        <field name="name">user.details.view.activity</field>
+        <field name="model">user.details</field>
+        <field name="arch" type="xml">
+          <activity string="User">
+               <templates>
+                  <div t-name="activity-box">
+                     <field name="name"></field>
+                  </div>
+             </templates>
+            </activity>
+        </field>
+        </record> -->
+
+
+        <record id="action_user_details" model="ir.actions.act_window">
+            <field name="name">User</field>
+            <field name="res_model">user.details</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+
+        <record id="base_menu" model="ir.ui.menu">
+            <field name="name">Customers</field>
+            <field name="sequence">2</field>
+        </record>
+
+        
+        <record id="user_menu" model="ir.ui.menu">
+            <field name="name">User</field>
+            <field name="action" ref="action_user_details"/>
+            <field name="sequence">1</field>
+            <field name="parent_id" ref="base_menu"/>
+        </record>
+
+    </data>
+</odoo>

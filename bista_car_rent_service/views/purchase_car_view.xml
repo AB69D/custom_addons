@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_car_form_view" model="ir.ui.view">
+            <field name="name">purchase.car.form</field>
+            <field name="model">purchase.car</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Tag Deatails">
+                            <field name="vendor" />
+                            <field name="confirmation_date" />
+                        </group>
+                        <notebook>
+                            <page name="cars" string="Car">
+                                <field name="product_details_lines">
+                                <tree editable="bottom" create="1">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="cost_price"/>
+                                    
+                                </tree>
+                            </field>
+                            </page>
+                        </notebook>       
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="purchase_car_tree_view" model="ir.ui.view">
+                <field name="name">purchase.car.tree</field>
+                <field name="model">purchase.car</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="vendor"/>
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_purchase_car" model="ir.actions.act_window">
+            <field name="name">Purchase </field>
+            <field name="res_model">purchase.car</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

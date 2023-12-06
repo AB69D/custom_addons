@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="class_class_form_view" model="ir.ui.view">
+            <field name="name">class.class.form</field>
+            <field name="model">class.class</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Class Details">
+                            <field name="name"/>
+                            <!-- <field name="students" widget="many2many_tags"/> -->
+                        </group>
+                                         
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="class_class_tree_view" model="ir.ui.view">
+                <field name="name">class.class.tree</field>
+                <field name="model">class.class</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                        <field name="name"/>              
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_class" model="ir.actions.act_window">
+            <field name="name">Class </field>
+            <field name="res_model">class.class</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
