@@ -7,5 +7,8 @@ access_car_brand_all,car.brand,model_car_brand,,1,1,1,1
 access_rent_package_all,rent.package,model_rent_package,,1,1,1,1
 access_rent_history_all,rent.history,model_rent_history,,1,1,1,1
 access_line_history_rent_all,line.history.rent,model_line_history_rent,,1,1,1,1
+access_payment_confirmation_all,payment.confirmation,model_payment_confirmation,,1,1,1,1
+
+
 
 

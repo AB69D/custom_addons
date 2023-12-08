@@ -9,7 +9,7 @@
                 <header>
                     <button string="Validate" name="submit_for_validation" type="object" class="oe_highlight" states='draft'/>
                     <button string="Cancel" name="submit_for_cancel" type="object" class="oe_highlight" states='validation'/>
-                    <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation' attrs="{'invisible': [('can_return', '=', 'True')]}" />
+                    <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation' />
                     <button string="Create Delivery" name="submit_for_create_delivery" type="object"  states='validation'/>
                     <field name="state" widget="statusbar"/>
                 </header>

@@ -9,8 +9,8 @@
             <field name="partner_id" position="after">
                 <field name="phone" optional="hide"/>
             </field>
-            <field name="invoice_status" position="attributes">
-                <attribute name="optional">show</attribute>
+            <field name="invoice_status" position="replace">
+                <field name="invoice_status" />
             </field>
             <!-- <xpath expr="//field[@name='invoice_status']" position="attributes">
                 <attribute name="optional">show</attribute>

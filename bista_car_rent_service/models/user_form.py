@@ -14,7 +14,13 @@ class ProductForrent(models.Model):
                                          default=0)
     # tax_ids = fields.Many2many('account.tax',string="Tax")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,invisible=True)
-    rent_amount = fields.Monetary(string='Rent', currency_field='currency_id', required=True)
+    rent_amount = fields.Monetary(related='rent_id.rent_package.rent_amount',string='Rent', currency_field='currency_id')
+    total_amount = fields.Float('Total Amount',compute='_compute_total_amount')
+    
+    @api.depends('rent_amount')
+    def _compute_total_amount(self):
+        for rec in self:
+            self.total_amount += rec.rent_amount
     
     @api.onchange('product_id','qty')
     def get_rent_amount(self):
@@ -52,7 +58,7 @@ class UserForm(models.Model):
         ('draft', 'Draft'),
         ('validation', 'Pending for delivery'),
         ('cancel', 'Cancel'),
-        ('return', 'Return'),
+        ('return', 'Return & Paid'),
 
     ], string='Status', default='draft', readonly=True, copy=False, tracking=True)
     rent_package = fields.Many2one('rent.package',string="Package",domain=[('active','=',True)])
@@ -92,6 +98,9 @@ class UserForm(models.Model):
         self.rent_day = self.rent_package.day
         self.return_date = self.rent_date + timedelta(days=self.rent_day)
     
+    def get_paid(self):
+        self.state = "return"
+        self.env['car.product'].search([('id','=',self.product_details_lines.product_id.id)]).reserve_increase(self.product_details_lines.done_qty)
     
     def submit_for_validation(self):
         self.state = "validation"
@@ -101,8 +110,17 @@ class UserForm(models.Model):
         self.state = "cancel"
     
     def submit_for_return(self):
-        self.state = "return"
-        self.env['car.product'].search([('id','=',self.product_details_lines.product_id.id)]).reserve_increase(self.product_details_lines.done_qty)
+        return{
+            'name':"process for payment",
+            'res_model':'payment.confirmation',
+            'type':'ir.actions.act_window',
+            'view_mode':'form',
+            'target':'new',
+            'context':{
+                'default_total_amount':self.product_details_lines.total_amount,
+                'id':self.id,
+            }
+        }
     
     def submit_for_create_delivery(self):
         self.create_rent_history()

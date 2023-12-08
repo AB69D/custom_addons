@@ -50,6 +50,7 @@ class RentHistory(models.Model):
             self.product_details_lines.done_qty = self.product_details_lines.qty
             self.env['user.form.register'].search([('ref','=',self.source_doc.ref)]).count_done(self.product_details_lines.done_qty)
             self.reserve_maintain(self.product_details_lines.done_qty)
+            self.product_details_lines.done_qty = self.product_details_lines.qty
         else:
             raise ValidationError("Don't have enough reserve for rent")
         
@@ -61,3 +62,5 @@ class RentHistory(models.Model):
     
     def get_payment(self):
         self.state = 'paid'
+        
+        

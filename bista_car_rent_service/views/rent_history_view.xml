@@ -9,7 +9,7 @@
                 <header>
                     <button string="Check Reserve" name="check_for_reserve" type="object" class="oe_highlight" states='draft'/>
                     <button string="Process for Payment" name="get_paid" type="object"  states='draft'/>
-                    <button string="Payment" name="get_payment" type="object" class="oe_highlight" states='payment'/>
+                    <!-- <button string="Payment" name="get_payment" type="object" class="oe_highlight" states='payment'/> -->
                     <!-- <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation'/> -->
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -47,6 +47,7 @@
                         <page name="other_info" string="Other Info">
                             
                         </page>
+
                     </notebook>
 
                     </sheet>

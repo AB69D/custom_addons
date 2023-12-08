@@ -19,6 +19,8 @@
         'views/car_brand_view.xml',
         'views/rent_history_view.xml',
         
+        'wizard/payment_confirmation_wizard_view.xml',
+        
         'views/menu.xml',
         'security/ir.model.access.csv',
     ],

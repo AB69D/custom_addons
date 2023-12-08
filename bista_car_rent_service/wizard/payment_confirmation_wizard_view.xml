@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payment_confirmation_wizard_view" model="ir.ui.view">
+            <field name="name">payment.confirmation.form</field>
+            <field name="model">payment.confirmation</field>
+            <field name="arch" type="xml">
+                <wizard create="1" save="1">
+                    <sheet>
+                        <group>  
+                            <group name="name" string="Payment Mode">
+                                <field name="sourch_doc" />
+                                <field name="full_payment" />
+                                <field name="down_payment" />
+                                <field name="total_amount" />
+                            </group>       
+                        </group>
+                        <footer>
+                            <button string="submit" class="btn-primary" name="get_paid" type="object"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </wizard>
+            </field>
+        </record>
+
+        <record id="action_payment_confirmation" model="ir.actions.act_window">
+            <field name="name">Payment </field>
+            <field name="res_model">payment.confirmation</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    </data>
+</odoo>
