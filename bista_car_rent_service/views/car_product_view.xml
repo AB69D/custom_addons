@@ -11,7 +11,7 @@
                             <button class="btn btn-primary oe_stat_button" type="object" name="action_total_rent_history"
                                     icon='fa-solid fa-users'>
                                     <field name="transfer_history_count"/>
-                                History
+                                Rents
                             </button>
                     </div>
                 <field name="image" widget='image' class="oe_avatar"/>
@@ -21,6 +21,7 @@
                             <field name="cost_price"/>
                             <field name="sale_price"/>
                             <field name="avilable_quantity"/>
+                            <!-- <field name="avilable"/> -->
                             
                         </group>
                         <group name="details" string="Brand">
@@ -46,12 +47,47 @@
                 </field>
         </record>
 
+        <record id="car_product_kanban" model="ir.ui.view">
+            <field name="name">car.product.kanban</field>
+            <field name="model">car.product</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <field name="image" widget="image" class="oe_avatar"/>
+                            </div>
+                            <div class="oe_kanban_global_click">
+                                <strong>
+                                    <field name="name"/>
+                                </strong><br/>
+                                <strong>Cost Price :</strong>
+                                <field name="cost_price" widget="monetary" options="{'currency_field': 'currency_id'}"
+                                    class="oe_kanban_content_oe_sale oe_kanban_global_click oe_kanban_global_click_monetary"/>
+                                <br/>
+                                <strong>Sale Price :</strong>
+                                <field name="sale_price" widget="monetary" options="{'currency_field': 'currency_id'}"
+                                    class="oe_kanban_content_oe_sale oe_kanban_global_click oe_kanban_global_click_monetary"/>
+                                <br/>
+                                <strong>Avilable Quentity :</strong>
+                                <field name="avilable_quantity" class="oe_kanban_content_oe_sales oe_kanban_global_click oe_kanban_global_click_sales"/>
+                                <br/>
+                                <strong>Brand :</strong>
+                                <field name="brand" class="oe_kanban_content_oe_sales oe_kanban_global_click oe_kanban_global_click_sales"/>
+                                <br/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
 
 
         <record id="car_product_action" model="ir.actions.act_window">
             <field name="name">Car List</field>
             <field name="res_model">car.product</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
         </record>
 
     </data>

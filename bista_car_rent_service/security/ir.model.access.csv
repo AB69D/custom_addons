@@ -1,14 +1,15 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_user_form_all,user.form.register,model_user_form_register,,1,1,1,1
-access_product_for_rent_all,product.for.rent,model_product_for_rent,,1,1,1,1
-access_car_product_all,car.product,model_car_product,,1,1,1,1
+access_user_form_all,user.form.register,model_user_form_register,access_category_car_rent_executive,1,1,1,1
+access_product_for_rent_all,product.for.rent,model_product_for_rent,access_category_car_rent_executive,1,1,1,1
+access_car_product_all,car.product,model_car_product,access_category_car_rent_executive,1,1,1,1
 access_color_tag_all,color.tag,model_color_tag,,1,1,1,1
 access_car_brand_all,car.brand,model_car_brand,,1,1,1,1
-access_rent_package_all,rent.package,model_rent_package,,1,1,1,1
-access_rent_history_all,rent.history,model_rent_history,,1,1,1,1
-access_line_history_rent_all,line.history.rent,model_line_history_rent,,1,1,1,1
-access_payment_confirmation_all,payment.confirmation,model_payment_confirmation,,1,1,1,1
-
-
-
+access_rent_package_all,rent.package,model_rent_package,access_category_car_rent_executive,1,1,1,1
+access_rent_history_all,rent.history,model_rent_history,access_category_car_rent_executive,1,1,1,1
+access_line_history_rent_all,line.history.rent,model_line_history_rent,access_category_car_rent_executive,1,1,1,1
+access_payment_confirmation_all,payment.confirmation,model_payment_confirmation,access_category_car_rent_approver,1,1,1,1
+access_down_payment_all,down.payment,model_down_payment,access_category_car_rent_executive,1,1,1,1
+access_payment_history_all,payment.history,model_payment_history,,1,1,1,1
+access_customer_invoice_all,customer.invoice,model_customer_invoice,access_category_car_rent_executive,1,1,1,1
+access_amount_line_all,amount.line,model_amount_line,access_category_car_rent_executive,1,1,1,1
 

@@ -15,6 +15,10 @@ class ProductForrent(models.Model):
     avilable_quantity = fields.Integer("Avilable Quantity", default=0)
     transfer_history_count = fields.Integer(compute='_compute_transfer_history_count',
                                              string='Transfer History Count', store=False)
+    avilable = fields.Boolean("Available",readonly=True)
+    
+    
+ 
     
     def _compute_transfer_history_count(self):
         for record in self:

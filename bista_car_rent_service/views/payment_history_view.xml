@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payment_history_form_view" model="ir.ui.view">
+            <field name="name">payment.history.form</field>
+            <field name="model">payment.history</field>
+            <field name="arch" type="xml">
+                <form create="1" save="1">
+                <sheet>
+                    <group>
+                          
+                        <group name="name" string="Payment Deatails">
+                            <field name="source_doc" />
+                            <field name="expected_payment" />
+                            <field name="due" />
+                            <field name="paid" />
+                        </group>       
+                    </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="payment_history_tree_view" model="ir.ui.view">
+                <field name="name">payment.history.tree</field>
+                <field name="model">payment.history</field>
+                <field name="arch" type="xml">
+                <tree create = "1">
+                    <field name="source_doc" />
+                    <field name="expected_payment" />
+                    <field name="paid" />
+                </tree>                    
+                </field>
+        </record>
+
+
+
+        <record id="action_payment_history" model="ir.actions.act_window">
+            <field name="name">Payment History </field>
+            <field name="res_model">payment.history</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+
+    </data>
+</odoo>

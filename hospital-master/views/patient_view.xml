@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Patient Name"></field>
+                <field name="age"></field>
+                <field name="gender"></field>
+                <field name="bill"></field>
+                <field name="paid"></field>
+                <!-- <field name="image"></field> -->
+                <field name="appointment_time"></field>
+                <field name="booking_time"></field>
+                <button name="pre_obj_res" string="Object Button" type="object" class="oe_highlight"/>
+                <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-info"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_test" states="step2,step3" string="Object Button" type="object" class="oe_highlight"/>
+                    <button name="action_create" string="Create" type="object" class="btn-success"/>
+
+
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-primary"/> -->
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-secondary"/> -->
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-success"/> -->
+                    <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-danger"/>
+                    <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-warning"/>
+                    <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-info"/>
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-light"/> -->
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-dark"/> -->
+                    <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-link"/> -->
+                    <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"></field>
+                    <group>
+                        <group>
+                            <field name="name"></field>
+                            <field name="model_name"/>
+                            <field name="email"/>
+                            <field name="age_comp"></field>
+                            <!-- <button name="action_test" string="Object Button" type="object" class="oe_highlight"/> -->
+                            <!-- <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn btn-primary"/> -->
+                        </group>
+                        <group>
+                            <field name="gender"></field>
+                            <field name="dob"></field>
+                            <field name="age"></field>
+                            <field name="active"></field>
+                        </group>
+                        <group>
+                            <field name="bill"></field>
+                            <field name="paid"></field>
+                        </group>
+                        <group>
+                            <field name="documents" filename="document_name"></field>
+                            <field name="document_name" invisible="1"></field>
+                        </group>
+                        <group>
+                            <field name="prescription" placeholder="Enter Prescription"></field>
+                        </group>
+                        <group>
+                            <field name="comments" placeholder="Enter Comments"></field>
+                        </group>
+                        <group>
+                            <field name="currency_id"></field>
+                            <field name="ticket_fees"></field>
+                            <field name="other_cost" widget="monetary"></field>
+                        </group>
+                        <group>
+                            <field name="appointment_time"></field>
+                            <field name="booking_time"></field>
+                        </group>
+                    </group>
+                    
+                </sheet>
+                
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+                <footer>
+                    <button name="action_test" string="Object Button" type="object" class="oe_highlight"/>
+                    <button name="%(hospital.action_hospital_patient)d" string="Action Button" type="action" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Searchable Fields -->
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('age', '>', 30), ('gender', 'ilike', self)]" string="Patient Name"></field>
+                <field name="age"></field>
+                <field name="gender"></field>
+                <field name="bill"></field>
+                <field name="paid"></field>
+                <field name="appointment_time" optional='hide'></field>
+                <field name="booking_time"></field>
+
+                <!-- Filter -->
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"></filter>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"></filter>
+                <separator></separator>
+                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', '5')]"></filter>
+                <separator></separator> 
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"></filter>
+                
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by' : 'gender'}"></filter>
+                </group>
+
+
+
+
+                <searchpanel>
+                    <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <!-- <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field> -->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_male':1,'group_by' : 'gender'}</field>
+        <!-- <field name="context">{'default_email' : 'suprodipsorkar@gmail.com'}</field> -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a patient details
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_hospital" name="Patients" action="action_hospital_patient" parent="menu_hospital_root" sequence="2"/>
+
+</odoo>

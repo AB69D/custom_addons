@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <odoo>
+    <data>
+     <record id="acess_customer_credit_allow" model="res.groups">
+            <field name="name">Update Credit</field>
+    </record>
+    
+    </data>
+    
+    
+ </odoo>
+ 

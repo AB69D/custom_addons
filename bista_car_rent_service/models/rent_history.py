@@ -22,6 +22,7 @@ class RentHistory(models.Model):
     _name = 'rent.history'
     _description = "all frecord of rent history"
     _rec_name = 'ref'
+    _order = 'id desc'
     
     ref = fields.Char("ref" ,readonly=True)
     res_user = fields.Many2one('hr.employee',string="User")
@@ -31,28 +32,34 @@ class RentHistory(models.Model):
     product_details_lines = fields.One2many('line.history.rent', 'rent_id', string="Car Details")
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('payment', 'Pending for payment'),
-        ('paid', 'paid'),
+        ('payment', 'Pending Return'),
+        ('paid', 'Returned'),
 
     ], string='Status', default='draft', readonly=True, copy=False, tracking=True)
     
     def check_for_reserve(self):
-        reserve_qty = self.env["car.product"].search([('id','=',self.product_details_lines.product_id.id)]).avilable_quantity
-        self.product_details_lines.reserve_qty = reserve_qty
+        for rec in self.product_details_lines:
+            reserve_qty = self.env["car.product"].search([('id','=',rec.product_id.id)]).avilable_quantity
+            rec.reserve_qty = reserve_qty
     
     def reserve_maintain(self,qty):
-        self.env['car.product'].search([('id','=',self.product_details_lines.product_id.id)]).reserve_dicrease(qty)
+        for rec in self.product_details_lines:
+            self.env['car.product'].search([('id','=',rec.product_id.id)]).reserve_dicrease(qty)
 
         
     def get_paid(self):
-        if self.product_details_lines.reserve_qty > self.product_details_lines.qty:
-            self.state = "payment"
-            self.product_details_lines.done_qty = self.product_details_lines.qty
-            self.env['user.form.register'].search([('ref','=',self.source_doc.ref)]).count_done(self.product_details_lines.done_qty)
-            self.reserve_maintain(self.product_details_lines.done_qty)
-            self.product_details_lines.done_qty = self.product_details_lines.qty
-        else:
-            raise ValidationError("Don't have enough reserve for rent")
+        for rec in self:
+            for line in rec.product_details_lines:
+                if line.reserve_qty >= line.qty:
+                    self.state = "payment"
+                    line.done_qty = line.qty
+                    self.env['user.form.register'].search([('ref','=',rec.source_doc.ref)]).count_done(line.done_qty,line.product_id)
+                    # self.reserve_maintain(line.done_qty)
+                    self.env['car.product'].search([('id','=',line.product_id.id)]).reserve_dicrease(line.done_qty)
+                    line.done_qty = line.qty
+                    self.env['user.form.register'].search([('ref','=',rec.source_doc.ref)]).charge_state_deliver()
+                else:
+                    raise ValidationError("Don't have enough reserve for rent")
         
     @api.model
     def create(self, vls):

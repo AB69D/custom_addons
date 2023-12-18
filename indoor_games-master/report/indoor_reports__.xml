@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_report_indoor__" model="ir.actions.report">
+        <field name="name">Indoor Games ||</field>
+        <field name="model">indoor.tournament</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_indoor_tournament</field>
+        <field name="report_file">indoor.report_indoor_tournament</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        
+        <field name="binding_model_id" ref="indoor.model_indoor_tournament"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_indoor_tournament">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                        <div class="row text-center bg-dark">
+                            <h3 t-esc=" 'Tournament Report for Tournament-' + str(doc.id)  " class="bg-light"/>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Tournament Master
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.member_name.name" class=""/>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Membership Type
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.member_name.member_type"/>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        email
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.member_name.email"/>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Membership Status
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.membership_status"/>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Tournament Start Time
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.tournament_start_time"/>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Tournament Duration
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.tournament_duration"/> Hours
+                                    </div>
+                                </div>
+                                <div class="col-12" style="display:flex;">
+                                    <div class="col-2">
+                                        Tournament End Time
+                                    </div>
+                                    <div class="col-2">
+                                        : <span t-esc="doc.tournament_end_time"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm mt-12">
+                            <tr class="text-center table-primary">
+                                <th>Event Master</th>
+                                <th>Event Game</th>
+                                <th>Event Game ID</th>
+                                <th>Event Start Time</th>
+                                <th>Event Duration</th>
+                                <th>Event End Time</th>
+
+                            </tr>
+                            <!-- <t t-set="total_qty" t-value="0"/> -->
+                            <t t-foreach="doc.record_line_ids" t-as="line">
+                                <tr class="text-center">
+                                    <td t-esc="line.member_name.name"/>
+                                    <td t-esc="line.event_game.name"/>
+                                    <td t-esc="line.event_game_id"/>
+                                    <td t-esc="line.event_start_time"/>
+                                    <td t-esc="line.event_duration"/>
+                                    <td t-esc="line.event_end_time"/>
+                                </tr>
+                                <!-- <t t-set="total_qty" t-value="total_qty + line.product_qty"/> -->
+                            </t>
+                            <!-- <tr class="text-center table-warning">
+                                <td><strong>Total</strong></td>
+                                <td t-esc="total_qty" class="text-end"/>
+                            </tr> -->
+                        </table>
+                        <div class="row">
+                            <div class="col-12" style="display:flex;">
+                                <div class="col-8">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Subtotal
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.subtotal"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Discount
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.discount"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Bill
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.bill"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Paid
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.tournament_paid_amount"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Due
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.tournament_due_amount"/>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- <template id="sldkjflkdjfslkdjflkjfdkfj" inherit_id="hospital.report_bista_purchase_order">
+        <xpath>
+
+        </xpath>
+    </template> -->
+
+
+    <record id="action_report_event_summary_2" model="ir.actions.report">
+        <field name="name">Event Summary</field>
+        <field name="model">indoor.event</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_event_summary_document_2</field>
+        <field name="report_file">indoor.report_event_summary_document_2</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        <field name="binding_model_id" ref="indoor.model_indoor_event"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_event_summary_document_2">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="row text-center">
+                    <h1 class="bg-info"> Event List </h1>
+                </div>
+
+                <table class="table table-sm">
+                    <tr>
+                        <th>Event Master</th>
+                        <th>Event Game</th>
+                        <th>Event Game ID</th>
+                        <th>Event Start Time</th>
+                        <th>Event Duration</th>
+                        <th>Event End Time</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    <tr t-foreach="docs" t-as="doc">
+                        <td t-esc="doc.member_name.name"/>
+                        <td t-esc="doc.event_game.name"/>
+                        <td t-esc="doc.event_game_id"/>
+                        <td t-esc="doc.event_start_time"/>
+                        <td t-esc="doc.event_duration"/>
+                        <td t-esc="doc.event_end_time"/>
+                        <td t-esc="doc.subtotal"/>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="action_report_event_summary_with_data_2" model="ir.actions.report">
+        <field name="name">Event Summary</field>
+        <field name="model">indoor.event</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_event_summary_document_with_data_2</field>
+        <field name="report_file">indoor.report_event_summary_document_with_data_2</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        <field name="binding_model_id" ref="indoor.model_indoor_event"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_event_summary_document_with_data_2">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="row text-center">
+                    <h1 class=""> Event List </h1>
+                    <h4 class=""> Event Game: <span t-esc="event_game"/> </h4> 
+                    <h4 class=""> Event Master: <span t-esc="event_master"/></h4>
+                    <h6 class=""> From <span t-esc="start_date"/> to <span t-esc="end_date"/></h6>
+                </div>
+
+                <table class="table table-sm">
+                    <tr class="text-center table-primary">
+                        <th>Game ID</th>
+                        <th>Start</th>
+                        <th>Duration</th>
+                        <th>End</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    <t t-set="total" t-value="0"/>
+                    <t t-set="cnt" t-value="0"/>
+                    <tr t-foreach="data_line" t-as="line" class="text-center table-secondary">
+                        <td t-esc="line['event_game_id']"/>
+                        <td t-esc="line['event_start_time']"/>
+                        <td t-esc="line['event_duration']"/>
+                        <td t-esc="line['event_end_time']"/>
+                        <td t-esc="line['subtotal']" class="text-end"/>
+                        <t t-set="total" t-value="total + line['subtotal']"/>
+                        <t t-set="cnt" t-value="cnt + 1"/>
+                        <!-- <li t-if="record.phone.raw_value"><field name="phone"/></li> -->
+                    </tr>
+                    <tr class="text-center table-warning">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td t-esc="total" class="text-end"/>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+
+
+
+
+</odoo>

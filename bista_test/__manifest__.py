@@ -9,6 +9,8 @@
     'sequence': -10000000,
     'summary':'this module build for test',
     'data': [
+        
+        'views/access_right_sale.xml',
         'views/inherit_product_tamplete_view.xml',
         'security/ir.model.access.csv',
     ],

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_employee_hne_extra_info" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <field name="coach_id" position="after">
+                <field name="joining_date"/>
+            </field>
+            <field name="coach_id" position="attributes">
+                <attribute name="string">Trainer</attribute>
+            </field>
+            <!-- <field name="work_location_id" position="before">
+                <field name="county"/>
+            </field> -->
+            <!-- <field name="bank_account_id" position="after">
+                <field name="bkash_account_no"/>
+            </field> -->
+            <xpath expr="//field[@name='bank_account_id']" position="after">
+                <field name="bkash_account_no"/>
+            </xpath>
+
+            <xpath expr="//page[@name='public']//group[4]" position="before">
+                <group string="Country Group">
+                    <group>
+                        <field name="county"/>
+                    </group>
+                    <group>
+                        <field name="parent_emp"/>
+                    </group>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

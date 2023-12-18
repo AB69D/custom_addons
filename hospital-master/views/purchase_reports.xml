@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_report_bista_purchase_order" model="ir.actions.report">
+        <field name="name">Bista Purchase Quotation</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">hospital.report_bista_purchase_order</field>
+        <field name="report_file">hospital.report_bista_purchase_order</field>
+        <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_bista_purchase_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <!-- Start -->
+                        <div class="row text-center">
+                            <h1 t-esc="doc.name"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-8">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Customer
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.partner_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Vendor Reference
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.partner_ref"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Currency
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.currency_id.name"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Quantity</th>
+                            </tr>
+                            <t t-set="total_qty" t-value="0"/>
+                            <t t-foreach="doc.order_line" t-as="line">
+                                <tr>
+                                    <td t-esc="line.product_id.name"/>
+                                    <td t-esc="line.product_qty"/>
+                                </tr>
+                                <t t-set="total_qty" t-value="total_qty + line.product_qty"/>
+                            </t>
+                            <tr>
+                                <td>Total</td>
+                                <td t-esc="total_qty"/>
+                            </tr>
+                        </table>
+
+                    <!-- End -->
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- <template id="sldkjflkdjfslkdjflkjfdkfj" inherit_id="hospital.report_bista_purchase_order">
+        <xpath>
+
+        </xpath>
+    </template> -->
+
+
+</odoo>

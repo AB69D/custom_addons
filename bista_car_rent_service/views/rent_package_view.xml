@@ -14,7 +14,7 @@
                             <field name="active"/>
                         </group> 
                         <group name="amount" string="Amount">
-                            <field name="currency_id" />
+                            <field name="currency_id" invisible="1"/>
                             <field name="rent_amount" />
                         </group>      
                     </group>
@@ -30,7 +30,8 @@
                 <field name="arch" type="xml">
                 <tree create = "1">
                         <field name="name"/>
-                        <field name="day"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="rent_amount" />
                         <field name="active"/>
                 </tree>                    
                 </field>

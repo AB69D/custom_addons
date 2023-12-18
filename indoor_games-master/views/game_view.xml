@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_indoor_game_tree" model="ir.ui.view">
+        <field name="name">indoor.game.tree</field>
+        <field name="model">indoor.game</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="charge_per_hour"/>
+                <field name="basic_partner_discount_percentage"/>
+                <field name="gold_partner_discount_percentage"/>
+                <field name="silver_partner_discount_percentage"/>
+                <!-- <field name="delay_charge"/> -->
+                <!-- <field name="available"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_indoor_game_form" model="ir.ui.view">
+        <field name="name">indoor.game.form</field>
+        <field name="model">indoor.game</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="charge_per_hour"/>
+                            <field name="qty"/>
+                        </group>
+                        <group>
+                            <!-- <field name="delay_charge"/> -->
+                            <!-- <field name="available"/> -->
+                        </group>
+                        
+                    </group>
+                    <notebook>
+                        <page name="Membership Discount">
+                            <group>
+                                <group>
+                                    <field name="basic_partner_discount_percentage"/>
+                                    <field name="silver_partner_discount_percentage"/>
+                                    <field name="gold_partner_discount_percentage"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="Participation Discount">
+                            <group>
+                                <group>
+                                    <field name="basic_partner_participation_discount_percentage"/>
+                                    <field name="silver_partner_participation_discount_percentage"/>
+                                    <field name="gold_partner_participation_discount_percentage"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_indoor_game_search" model="ir.ui.view">
+        <field name="name">indoor.game.search</field>
+        <field name="model">indoor.game</field>
+        <field name="arch" type="xml">
+            <search>
+                
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_indoor_game" model="ir.actions.act_window">
+        <field name="name">Games</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">indoor.game</field>
+        <!-- <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field> -->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Game details
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_indoor_game" name="Games" action="action_indoor_game" parent="menu_indoor_root" sequence="2"/>
+
+</odoo>

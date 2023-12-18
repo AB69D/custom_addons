@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="acess_category_other" model="ir.module.category">
+            <field name="name">Other Access</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="acess_category_hospital" model="ir.module.category">
+            <field name="name">Hospital Management</field>
+            <field name="parent_id" ref="base.module_category_sales" />
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="acess_category_hospital_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="hospital.acess_category_hospital"/>
+        </record>
+
+        <record id="acess_category_hospital_approver" model="res.groups">
+            <field name="name">Approver</field>
+            <field name="category_id" ref="hospital.acess_category_hospital"/>
+            <field name="implied_ids" eval="[(4,ref('hospital.acess_category_hospital_user'))]"/>
+        </record>
+
+        <record id="acess_category_hospital_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="hospital.acess_category_hospital"/>
+            <field name="implied_ids" eval="[(4,ref('hospital.acess_category_hospital_approver'))]"/>
+            <field name="users" eval="[(4,ref('base.user_admin'))]"/>
+        </record>
+
+        <!-- <record id="sldkjflsdkjfldskjfsdlkfj" model="ir.rule">
+            <field name="name">Portal Purchase Orders</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">['|', ('message_partner_ids','child_of',[user.commercial_partner_id.id]),('partner_id', 'child_of', [user.commercial_partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+        </record> -->
+
+    </data>
+</odoo>

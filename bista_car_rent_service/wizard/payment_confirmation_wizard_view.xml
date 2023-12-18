@@ -5,7 +5,7 @@
             <field name="name">payment.confirmation.form</field>
             <field name="model">payment.confirmation</field>
             <field name="arch" type="xml">
-                <wizard create="1" save="1">
+                <form create="1" save="1">
                     <sheet>
                         <group>  
                             <group name="name" string="Payment Mode">
@@ -20,7 +20,7 @@
                             <button string="Cancel" class="btn-secondary" special="cancel"/>
                         </footer>
                     </sheet>
-                </wizard>
+                </form>
             </field>
         </record>
 

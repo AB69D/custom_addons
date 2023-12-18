@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <menuitem id="menu_bonus_root" name="Bista Bonus" sequence="0"/>
+    <!-- menuitem inheritance task -->
+    <record id="sale.sales_team_config"  model="ir.ui.menu">
+        <field name="name">Sales Teams - inherited and changed name by Suprodip Sarkar</field>
+    </record>
+</odoo>

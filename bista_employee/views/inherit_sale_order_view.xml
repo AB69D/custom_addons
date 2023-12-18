@@ -57,6 +57,26 @@
             </xpath>
         </field>
     </record>
+
+    <record id="inherit_res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//ul[1]//li[5]" position="after">
+                <br/>
+                <li t-if="record.phone.raw_value" class="o_text_overflow"><field name="phone"/></li>
+            </xpath>
+        </field>
+    </record>
     
 
+    <template id="sale_order_report_inherit" name="inherit_sale_order" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_description']" position="replace">
+        <th name="th_description" class="text-start">Product Description</th>
+            
+        </xpath>
+    </template>
+
+    
 </odoo>

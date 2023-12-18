@@ -1,0 +1,1 @@
+from . import product_template_in, sale_order_line_in, stock_picking_in, account_move_line_in, sale_order_in

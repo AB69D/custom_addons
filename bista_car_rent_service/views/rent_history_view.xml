@@ -9,11 +9,11 @@
                 <header>
                     <button string="Check Reserve" name="check_for_reserve" type="object" class="oe_highlight" states='draft'/>
                     <button string="Process for Payment" name="get_paid" type="object"  states='draft'/>
-                    <!-- <button string="Payment" name="get_payment" type="object" class="oe_highlight" states='payment'/> -->
-                    <!-- <button string="Return" name="submit_for_return" type="object" class="oe_highlight" states='validation'/> -->
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Returned" attrs="{'invisible': [('state', '!=', 'paid')]}"/>
+
                     <group>
                         <field name="ref" style="font-size:50px;"/>
                         <group name="user" string="user">
@@ -63,7 +63,7 @@
                         <field name="ref"/>
                         <field name="res_user"/>
                         <field name="rent_date"/>
-                        <field name="return_date"/> 
+                        <field name="return_date" widget="remaining_days"/> 
                         <field name="source_doc"/>              
                 </tree>                    
                 </field>

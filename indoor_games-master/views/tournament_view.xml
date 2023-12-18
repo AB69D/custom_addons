@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_indoor_tournament_tree" model="ir.ui.view">
+        <field name="name">indoor.tournament.tree</field>
+        <field name="model">indoor.tournament</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'confirm' " 
+                    decoration-info="state == 'draft' " 
+                    decoration-danger="state == 'cancel' ">
+                <field name="member_name" string="Event Master"/>
+                <field name="tournament_start_time"/>
+                <field name="tournament_duration"/>
+                <field name="tournament_end_time"/>
+
+                <field name="state" widget="badge" decoration-success="state == 'confirm' " 
+                                                    decoration-info="state == 'draft' "
+                                                    decoration-danger="state == 'cancel' "/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_indoor_tournament_form" model="ir.ui.view">
+        <field name="name">indoor.tournament.form</field>
+        <field name="model">indoor.tournament</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_confirm" states="draft" string="Confirm" type="object" class="oe_highlight"/>
+                    <button name="button_draft" states="cancel" string="Reset to Draft" type="object" class="oe_highlight"/>
+                    <button name="button_make_payment" states="confirm" string="Make Payment" type="object" class="oe_highlight"/>
+                    <button name="button_cancel" states="draft,confirm" string="Cancel" type="object" class="oe_highlight"/>
+                    <!-- <field name="state" widget="statusbar" options="{'clickable':'1'}"/> -->
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button name="button_smart_paid" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                            <!-- <span >transactions</span> -->
+                            <field name="tournament_transaction_cnt"  widget="statinfo" string="transactions"/>
+                            <!-- <span >Paid</span>
+                            <field name="tournament_paid_amount"/> -->
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="member_name" placeholder="Suprodip Sarkar"/>
+                            <field name = "member_email"/>
+                            <field name="member_type"/>
+                            <field name="membership_status"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="tournament_start_time"/>
+                            <field name="tournament_duration"/>
+                            <field name="tournament_end_time"/>
+                        </group>
+                    </group>
+                     <notebook>
+                        <!-- <page string="Events">
+                            <field name="record_line_ids"/>
+                        </page> -->
+                        <page string="Events II">
+                            <field name="record_line_ids">
+                                <tree editable="bottom">
+                                    <field name="member_name" string="Event Master"/>
+                                    <field name="event_game"/>
+                                    <field name="event_start_time" context="{'con' : parent.record_line_ids, 'event_start_time' : None, 'event_end_time' : event_end_time, 'event_duration' : event_duration, 'event_game_id' : event_game_id}"/>
+                                    <field name="event_duration" context="{'con' : parent.record_line_ids, 'event_start_time' : event_start_time, 'event_end_time' : event_end_time, 'event_duration' : None, 'event_game_id' : event_game_id}"/>
+                                    <field name="event_players" widget="many2many_tags"/>
+                                    <field name="event_game_id"/>
+                                    <field name="event_end_time"/>
+                                    <field name="subtotal"/>
+                                    <!-- <field name="bill"/> -->
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="member_name"/>
+                                            <field name="event_game"/>
+                                            <field name="event_start_time"/>
+                                            <field name="event_duration" context="{'event_start_time' : event_start_time, 'event_end_time' : event_end_time, 'event_game_id' : event_game_id}"/>
+                                            <field name="event_players" widget="many2many_tags"/>
+                                            <field name="event_game_id"/>
+                                            <field name="event_end_time"/>
+                                            <field name="subtotal"/>
+                                            <!-- <field name="bill"/> -->
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <group>
+                            <group>
+                                
+                                <group string="Payment Information">
+                                    <field name="tournament_paid_amount"/>
+                                    <field name="tournament_due_amount"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                            </group>
+                            <group>
+                                <field name="subtotal"/>
+                                <field name="discount"/>
+                                <field name="participation_discount"/>
+                                <field name="tax"/>
+                                <field name="bill"/>
+                            </group>
+                            
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('age', 'ilike', self), ('gender', 'ilike', self)]" string="Patient Name"></field>
+                <field name="age"></field>
+                <field name="gender"></field>
+
+                <field name="bill"></field>
+                <field name="paid"></field>
+                <field name="appointment_time"></field>
+                <field name="booking_time"></field>
+
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"></filter>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"></filter>
+                <separator></separator>
+                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', '5')]"></filter>
+                <separator></separator> 
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"></filter>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by' : 'gender'}"></filter>
+                </group>
+                <searchpanel>
+                    <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record> -->
+
+
+    <record id="action_indoor_tournament" model="ir.actions.act_window">
+        <field name="name">Tournaments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">indoor.tournament</field>
+        <!-- <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field> -->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Tournament details
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_indoor_tournament" name="Tournaments" action="action_indoor_tournament" parent="menu_indoor_root" sequence="4"/>
+
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <menuitem id="menu_indoor_root" name="Indoor Games" sequence="0"/>
+    <record id="sale.sale_menu_config_activity_type"  model="ir.ui.menu">
+        <field name="name">Task Types</field>
+    </record>
+</odoo>

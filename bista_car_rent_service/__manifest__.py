@@ -18,11 +18,21 @@
         'views/rent_package_view.xml',
         'views/car_brand_view.xml',
         'views/rent_history_view.xml',
+        'views/payment_history_view.xml',
+        'views/customer_invoice.xml',
+        
+        
         
         'wizard/payment_confirmation_wizard_view.xml',
+        'wizard/down_payment.xml',
+        
+        
+        'report/user_form_report.xml',
         
         'views/menu.xml',
+        'security/access_group.xml',
         'security/ir.model.access.csv',
+        
     ],
     'installable': True,
     'application': True,

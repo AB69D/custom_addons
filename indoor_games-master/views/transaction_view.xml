@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_indoor_transaction_tree" model="ir.ui.view">
+        <field name="name">indoor.transaction.tree</field>
+        <field name="model">indoor.transaction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="transaction_id"/>
+                <field name="event_id"/>
+                <field name="member_name" string="Event Master"/>
+                <field name="event_game"/>
+                <field name="event_game_id"/>
+                <field name="event_start_time"/>
+                <field name="event_duration"/>
+                <field name="event_end_time"/>
+                <!-- <field name="event_players" widget="many2many_tags"/> -->
+                <field name="bill" optional="hide"/>
+                <field name="payment_method"/>
+                <field name="payment_status" optional="hide"/>
+                <field name="paid_amount"/>
+                <!-- <field name="due_amount"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_indoor_transaction_form" model="ir.ui.view">
+        <field name="name">indoor.transaction.form</field>
+        <field name="model">indoor.transaction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="transaction_id"/>
+                            <field name="event_id"/>
+                            <field name="member_name"/>
+                        </group>
+                        <group>
+                            <!-- <field name="event_game"/>
+                            <field name="event_game_id"/>
+                            <field name="event_start_time"/>
+                            <field name="event_duration"/>
+                            <field name="event_end_time"/> -->
+                        </group>
+                        <group>
+                            <field name="subtotal"/>
+                            <field name="discount"/>
+                            <field name="participation_discount"/>
+                            <field name="tax"/>
+                            <field name="bill"/>
+                            <field name="payment_method"/>
+                            <field name="payment_status"/>
+                            <field name="paid_amount"/>
+                            <!-- <field name="due_amount"/> -->
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Confirm Payment" class="oe_highlight" special="save"/>
+                    <button string="Cancel" class="oe_highlight" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('age', 'ilike', self), ('gender', 'ilike', self)]" string="Patient Name"></field>
+                <field name="age"></field>
+                <field name="gender"></field>
+
+                <field name="bill"></field>
+                <field name="paid"></field>
+                <field name="appointment_time"></field>
+                <field name="booking_time"></field>
+
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"></filter>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"></filter>
+                <separator></separator>
+                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', '5')]"></filter>
+                <separator></separator> 
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"></filter>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by' : 'gender'}"></filter>
+                </group>
+                <searchpanel>
+                    <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record> -->
+
+
+    <record id="action_indoor_transaction" model="ir.actions.act_window">
+        <field name="name">Transaction</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">indoor.transaction</field>
+        <!-- <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field> -->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Transaction details
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_indoor_transaction" name="Transactions" action="action_indoor_transaction" parent="menu_indoor_root" sequence="5"/>
+
+</odoo>

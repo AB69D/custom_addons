@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_user_form_report" model="ir.actions.report">
+        <field name="name">Rent Report</field>
+        <field name="model">user.form.register</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">bista_car_rent_service.report_user_form_register</field>
+        <field name="report_file">bista_car_rent_service.report_user_form_register</field>
+        <field name="print_report_name">(object.ref)</field>
+        <field name="binding_model_id" ref="bista_car_rent_service.model_user_form_register"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_user_form_register">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div>
+                        <div class="text-center">
+                            <h1 t-esc="doc.ref"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="row mt-4">
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Name</div>
+                                    <div class="col-8">: <span t-esc="doc.rent_for.name"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Phone</div>
+                                    <div class="col-8">: <span t-esc="doc.phone"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Rent Date</div>
+                                    <div class="col-8">: <span t-esc="doc.rent_date"/></div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Day</div>
+                                    <div class="col-8">: <span t-esc="doc.rent_day"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Return</div>
+                                    <div class="col-8">: <span t-esc="doc.return_date"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 font-weight-bold">Status</div>
+                                    <div class="col-8">: <span t-esc="doc.state"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Done</th>
+                                        <th scope="col">Rent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total" t-value="0"/>
+                                        <t t-foreach="doc.product_details_lines" t-as="line">
+                                            <tr>
+                                                <td><t t-esc="line.product_id.name"/></td>
+                                                <td style="text-align: center;"><t t-esc="line.qty"/></td>
+                                                <td style="text-align: center;"><t t-esc="line.done_qty"/></td>
+                                                <td style="text-align: right;"><t t-esc="line.rent_amount"/></td>
+                                                <t t-set="total" t-value="total + line.rent_amount"/>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td style="text-align: right;"><t t-esc="total"/></td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    
+                    <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="float-right">
+                                    
+                                    ----------------
+                                    <div class="row">
+                                        <div class="col-4 font-weight-bold">Signature</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

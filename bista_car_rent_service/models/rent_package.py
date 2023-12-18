@@ -9,4 +9,4 @@ class RentPackage(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', required=True)
     rent_amount = fields.Monetary(string='Rent', currency_field='currency_id', required=True)
 
-    active = fields.Boolean("active")
+    active = fields.Boolean("active", default=True)

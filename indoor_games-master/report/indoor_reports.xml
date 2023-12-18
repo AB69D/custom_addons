@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_report_indoor" model="ir.actions.report">
+        <field name="name">Indoor Games</field>
+        <field name="model">indoor.tournament</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_indoor_tournament</field>
+        <field name="report_file">indoor.report_indoor_tournament</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        <field name="binding_model_id" ref="indoor.model_indoor_tournament"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_indoor_tournament">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                        <div class="row text-center bg-dark">
+                            <h1 t-esc="doc.member_name.name" class="bg-info"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-8">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Tournament Master
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.member_name.name" class="bg-dark text-warning"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Membership Type
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.member_name.member_type"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            email
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-esc="doc.member_name.email"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <table class="table table-sm mt-12">
+                            <tr class="text-center table-primary">
+                                <th>Event Master</th>
+                                <th>Event Game</th>
+                                <th>Event Game ID</th>
+                                <th>Event Start Time</th>
+                                <th>Event Duration</th>
+                                <th>Event End Time</th>
+
+                            </tr>
+                            <!-- <t t-set="total_qty" t-value="0"/> -->
+                            <t t-foreach="doc.record_line_ids" t-as="line">
+                                <tr class="text-center">
+                                    <td t-esc="line.member_name.name"/>
+                                    <td t-esc="line.event_game.name"/>
+                                    <td t-esc="line.event_game_id"/>
+                                    <td t-esc="line.event_start_time"/>
+                                    <td t-esc="line.event_duration"/>
+                                    <td t-esc="line.event_end_time"/>
+                                </tr>
+                                <!-- <t t-set="total_qty" t-value="total_qty + line.product_qty"/> -->
+                            </t>
+                            <!-- <tr class="text-center table-warning">
+                                <td><strong>Total</strong></td>
+                                <td t-esc="total_qty" class="text-end"/>
+                            </tr> -->
+                        </table>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-8">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4 bg-success">
+                                            Subtotal
+                                        </div>
+                                        <div class="col-8 bg-info">
+                                            : <span t-field="doc.subtotal"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Discount
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.discount"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Bill
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.bill"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4 bg-success">
+                                            Paid
+                                        </div>
+                                        <div class="col-8 bg-info">
+                                            : <span t-field="doc.tournament_paid_amount"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display:flex;">
+                                        <div class="col-4">
+                                            Due
+                                        </div>
+                                        <div class="col-8">
+                                            : <span t-field="doc.tournament_due_amount"/>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- <template id="sldkjflkdjfslkdjflkjfdkfj" inherit_id="hospital.report_bista_purchase_order">
+        <xpath>
+
+        </xpath>
+    </template> -->
+
+    <record id="action_report_event_summary" model="ir.actions.report">
+        <field name="name">Event Summary</field>
+        <field name="model">indoor.event</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_event_summary_document</field>
+        <field name="report_file">indoor.report_event_summary_document</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        <field name="binding_model_id" ref="indoor.model_indoor_event"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_event_summary_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="row text-center bg-dark">
+                    <h1 class="bg-info"> Event List </h1>
+                </div>
+
+                <table class="table table-sm">
+                    <tr>
+                        <th>Event</th>
+                        <th>Event Master</th>
+                        <th>Start</th>
+                    </tr>
+                    <tr t-foreach="docs" t-as="doc">
+                        <td t-esc="doc.event_game.name"/>
+                        <td t-esc="doc.member_name.name"/>
+                        <td t-esc="doc.event_start_time"/>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="action_report_event_summary_with_data" model="ir.actions.report">
+        <field name="name">Event Summary</field>
+        <field name="model">indoor.event</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">indoor.report_event_summary_document_with_data</field>
+        <field name="report_file">indoor.report_event_summary_document_with_data</field>
+        <field name="print_report_name">('Report - %s' % (object.member_name.name))</field>
+        <field name="binding_model_id" ref="indoor.model_indoor_event"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_event_summary_document_with_data">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="row text-center bg-dark">
+                    <h1 class="bg-info"> Event List </h1>
+                    <h6> <span t-esc="start_date"/> to <span t-esc="end_date"/></h6>
+                </div>
+
+                <table class="table table-sm">
+                    <tr>
+                        <th>Event</th>
+                        <th>Event Master</th>
+                        <th>Start</th>
+                    </tr>
+                    <tr t-foreach="data_line" t-as="line">
+                        <td t-esc="line[0]"/>
+                        <td t-esc="line[1]"/>
+                        <td t-esc="line[2]"/>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+
+
+</odoo>

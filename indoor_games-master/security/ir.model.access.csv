@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_indoor_member,access_indoor_indoor.member,indoor.model_indoor_member,,1,1,1,1
+access_indoor_game,access_indoor_indoor.game,indoor.model_indoor_game,,1,1,1,1
+access_indoor_membership,access_indoor_indoor.membership,indoor.model_indoor_membership,,1,1,1,1
+access_indoor_event,access_indoor_indoor.event,indoor.model_indoor_event,,1,1,1,1
+access_indoor_transaction,access_indoor_indoor.transaction,indoor.model_indoor_transaction,,1,1,1,1
+access_indoor_report,access_indoor_indoor.report,indoor.model_indoor_report,,1,1,1,1
+access_indoor_tournament,access_indoor_indoor.tournament,indoor.model_indoor_tournament,,1,1,1,1
+access_indoor_tevent,access_indoor_indoor.tevent,indoor.model_indoor_tevent,,1,1,1,1
+
